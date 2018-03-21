@@ -1,0 +1,5 @@
+D:\VSprojects\Assignment1SD\Entity\bin\Debug\Entity.dll
+D:\VSprojects\Assignment1SD\Entity\bin\Debug\Entity.pdb
+D:\VSprojects\Assignment1SD\Entity\obj\Debug\Entity.csproj.CoreCompileInputs.cache
+D:\VSprojects\Assignment1SD\Entity\obj\Debug\Entity.dll
+D:\VSprojects\Assignment1SD\Entity\obj\Debug\Entity.pdb
