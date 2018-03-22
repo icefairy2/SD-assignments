@@ -1,0 +1,3 @@
+Database: pingpong
+Username: ppadmin
+Password: ppadmin

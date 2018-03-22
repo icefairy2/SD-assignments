@@ -1,6 +1,0 @@
-D:\VSprojects\Assignment1SD\Entity\bin\x64\Debug\Entity.dll
-D:\VSprojects\Assignment1SD\Entity\bin\x64\Debug\Entity.pdb
-D:\VSprojects\Assignment1SD\Entity\obj\x64\Debug\Entity.csprojResolveAssemblyReference.cache
-D:\VSprojects\Assignment1SD\Entity\obj\x64\Debug\Entity.csproj.CoreCompileInputs.cache
-D:\VSprojects\Assignment1SD\Entity\obj\x64\Debug\Entity.dll
-D:\VSprojects\Assignment1SD\Entity\obj\x64\Debug\Entity.pdb
