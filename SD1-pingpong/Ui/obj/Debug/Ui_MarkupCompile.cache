@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\VSprojects\SD1-pingpong\Ui\obj\Debug\
+D:\VSprojects\SD1-pingpong-repo\SD1-pingpong\Ui\obj\Debug\
 Ui
 none
 false
 DEBUG;TRACE
-D:\VSprojects\SD1-pingpong\Ui\App.xaml
+D:\VSprojects\SD1-pingpong-repo\SD1-pingpong\Ui\App.xaml
 3-243690518
 
-7-833951895
+111244029330
 13-1142990016
 AdminWindow.xaml;MainWindow.xaml;UserWindow.xaml;
 
-False
+True
 

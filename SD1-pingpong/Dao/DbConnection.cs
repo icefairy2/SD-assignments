@@ -15,19 +15,20 @@ namespace Dao
         private SqlConnection conn;
         private string dbConnectionString = "Data Source=DESKTOP-R95RP8R;Initial Catalog=pingpong;Integrated Security=True";
 
-        /// <constructor>
+        /// <summary>
         /// Initialise Connection
-        /// </constructor>
+        /// </summary>
         public DbConnection()
         {
             myAdapter = new SqlDataAdapter();
             conn = new SqlConnection(dbConnectionString);
         }
 
-        /// <method>
-        /// Open Database Connection if Closed or Broken
-        /// </method>
-        private SqlConnection openConnection()
+        /// <summary>
+        /// Open database connection if closed
+        /// </summary>
+        /// <returns>The sqlconnection object</returns>
+        internal SqlConnection openConnection()
         {
             if (conn.State == ConnectionState.Closed || conn.State ==
                         ConnectionState.Broken)
@@ -40,7 +41,7 @@ namespace Dao
         /// <method>
         /// Close Database Connection if Open
         /// </method>
-        private SqlConnection closeConnection()
+        internal SqlConnection closeConnection()
         {
             if (conn.State == ConnectionState.Open)
             {
@@ -48,10 +49,13 @@ namespace Dao
             }
             return conn;
         }
-
-        /// <method>
-        /// Select Query
-        /// </method>
+        
+        /// <summary>
+        /// Method for executing a query
+        /// </summary>
+        /// <param name="_query">The query to execute</param>
+        /// <param name="sqlParameter">the sql parameters for the given query</param>
+        /// <returns>A datatable result</returns>
         public DataTable executeSelectQuery(String _query, SqlParameter[] sqlParameter)
         {
             SqlCommand myCommand = new SqlCommand();
