@@ -45,5 +45,11 @@
     <Compile Include="UserDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Entity\Entity.csproj">
+      <Project>{6DD4333D-C18E-43B7-A1DD-CE68C8AEE231}</Project>
+      <Name>Entity</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

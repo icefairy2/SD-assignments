@@ -28,7 +28,7 @@ namespace Dao
         /// Open database connection if closed
         /// </summary>
         /// <returns>The sqlconnection object</returns>
-        internal SqlConnection openConnection()
+        internal SqlConnection OpenConnection()
         {
             if (conn.State == ConnectionState.Closed || conn.State ==
                         ConnectionState.Broken)
@@ -41,7 +41,7 @@ namespace Dao
         /// <method>
         /// Close Database Connection if Open
         /// </method>
-        internal SqlConnection closeConnection()
+        internal SqlConnection CloseConnection()
         {
             if (conn.State == ConnectionState.Open)
             {
@@ -53,10 +53,10 @@ namespace Dao
         /// <summary>
         /// Method for executing a query
         /// </summary>
-        /// <param name="_query">The query to execute</param>
+        /// <param name="query">The query to execute</param>
         /// <param name="sqlParameter">the sql parameters for the given query</param>
         /// <returns>A datatable result</returns>
-        public DataTable executeSelectQuery(String _query, SqlParameter[] sqlParameter)
+        public DataTable ExecuteSelectQuery(String query, SqlParameter[] sqlParameter)
         {
             SqlCommand myCommand = new SqlCommand();
             DataTable dataTable = new DataTable();
@@ -64,8 +64,8 @@ namespace Dao
             DataSet ds = new DataSet();
             try
             {
-                myCommand.Connection = openConnection();
-                myCommand.CommandText = _query;
+                myCommand.Connection = OpenConnection();
+                myCommand.CommandText = query;
                 myCommand.Parameters.AddRange(sqlParameter);
                 myCommand.ExecuteNonQuery();
                 myAdapter.SelectCommand = myCommand;
@@ -75,25 +75,22 @@ namespace Dao
             catch (SqlException e)
             {
                 Console.Write("Error - Connection.executeSelectQuery - Query: " 
-                    + _query + " \nException: " + e.StackTrace.ToString());
+                    + query + " \nException: " + e.StackTrace.ToString());
                 return null;
             }
             finally
             {
-                myCommand.Connection = closeConnection();
+                myCommand.Connection = CloseConnection();
             }
             return dataTable;
         }
 
-        /// <method>
-        /// Insert Query
-        /// </method>
-        public bool executeInsertQuery(String _query, SqlParameter[] sqlParameter)
+        public bool ExecuteInsertQuery(String _query, SqlParameter[] sqlParameter)
         {
             SqlCommand myCommand = new SqlCommand();
             try
             {
-                myCommand.Connection = openConnection();
+                myCommand.Connection = OpenConnection();
                 myCommand.CommandText = _query;
                 myCommand.Parameters.AddRange(sqlParameter);
                 myAdapter.InsertCommand = myCommand;
@@ -107,20 +104,17 @@ namespace Dao
             }
             finally
             {
-                myCommand.Connection = closeConnection();
+                myCommand.Connection = CloseConnection();
             }
             return true;
         }
 
-        /// <method>
-        /// Update Query
-        /// </method>
-        public bool executeUpdateQuery(String _query, SqlParameter[] sqlParameter)
+        public bool ExecuteUpdateQuery(String _query, SqlParameter[] sqlParameter)
         {
             SqlCommand myCommand = new SqlCommand();
             try
             {
-                myCommand.Connection = openConnection();
+                myCommand.Connection = OpenConnection();
                 myCommand.CommandText = _query;
                 myCommand.Parameters.AddRange(sqlParameter);
                 myAdapter.UpdateCommand = myCommand;
@@ -134,20 +128,17 @@ namespace Dao
             }
             finally
             {
-                myCommand.Connection = closeConnection();
+                myCommand.Connection = CloseConnection();
             }
             return true;
         }
 
-        /// <method>
-        /// Delete Query
-        /// </method>
-        public bool executeDeleteQuery(String _query, SqlParameter[] sqlParameter)
+        public bool ExecuteDeleteQuery(String _query, SqlParameter[] sqlParameter)
         {
             SqlCommand myCommand = new SqlCommand();
             try
             {
-                myCommand.Connection = openConnection();
+                myCommand.Connection = OpenConnection();
                 myCommand.CommandText = _query;
                 myCommand.Parameters.AddRange(sqlParameter);
                 myAdapter.DeleteCommand = myCommand;
@@ -161,7 +152,7 @@ namespace Dao
             }
             finally
             {
-                myCommand.Connection = closeConnection();
+                myCommand.Connection = CloseConnection();
             }
             return true;
         }
