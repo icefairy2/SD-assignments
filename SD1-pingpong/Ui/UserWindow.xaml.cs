@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Business;
+using Entity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +21,21 @@ namespace Ui
     /// </summary>
     public partial class UserWindow : Window
     {
+
         public UserWindow()
         {
             InitializeComponent();
+            var getTournaments = new GetTournaments();
+            var allTournaments = getTournaments.Execute();
+            foreach(Tournament trn in allTournaments)
+            {
+                tounamentList.Items.Add(trn.Name);
+            }        
+        }
+
+        private void tounamentList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

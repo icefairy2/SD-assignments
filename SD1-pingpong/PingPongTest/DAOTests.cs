@@ -33,7 +33,6 @@ namespace PingPongTest
             var userDao = new UserDAO();
             var testUserList = new List<User>();
             testUserList = userDao.FindAllUsers();
-
             Assert.IsTrue(testUserList.Any());
         }
     }

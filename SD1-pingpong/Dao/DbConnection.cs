@@ -11,8 +11,8 @@ namespace Dao
 {
     public class DbConnection
     {
-        private SqlConnection conn;
-        private string dbConnectionString = "Data Source=DESKTOP-R95RP8R;Initial Catalog=pingpong;Integrated Security=True";
+        internal SqlConnection ActualConnection;
+        private string _dbConnectionString = "Data Source=DESKTOP-R95RP8R;Initial Catalog=pingpong;Integrated Security=True";
 
         public static DbConnection ConnectionInstance = new DbConnection();
 
@@ -21,7 +21,7 @@ namespace Dao
         /// </summary>
         public DbConnection()
         {
-            conn = new SqlConnection(dbConnectionString);
+            ActualConnection = new SqlConnection(_dbConnectionString);
         }
 
         /// <summary>
@@ -30,24 +30,28 @@ namespace Dao
         /// <returns>The sqlconnection object</returns>
         internal SqlConnection OpenConnection()
         {
-            if (conn.State == ConnectionState.Closed || conn.State ==
+            if (ActualConnection.State == ConnectionState.Closed || ActualConnection.State ==
                         ConnectionState.Broken)
             {
-                conn.Open();
+                ActualConnection.Open();
             }
-            return conn;
+            return ActualConnection;
         }
 
         /// <method>
         /// Close Database Connection if Open
         /// </method>
-        internal SqlConnection CloseConnection()
+        internal bool CloseConnection()
         {
-            if (conn.State == ConnectionState.Open)
+            if (ActualConnection.State == ConnectionState.Open)
             {
-                conn.Close();
+                ActualConnection.Close();
             }
-            return conn;
+            if (ActualConnection.State == ConnectionState.Closed)
+            {
+                return true;
+            }
+            return false;
         }
         
         /// <summary>
@@ -92,7 +96,7 @@ namespace Dao
             }
         }
 
-        public bool ExecuteInsertQuery(String query, SqlParameter[] sqlParameter)
+        public bool ExecuteParameterQuery(String query, SqlParameter[] sqlParameter)
         {
             var myCommand = new SqlCommand();
             try
@@ -106,44 +110,6 @@ namespace Dao
             {
                 Console.Write("Error - Connection.executeInsertQuery - Query: " 
                     + query + " \nException: \n" + e.StackTrace.ToString());
-                return false;
-            }
-            return true;
-        }
-
-        public bool ExecuteUpdateQuery(String query, SqlParameter[] sqlParameter)
-        {
-            SqlCommand myCommand = new SqlCommand();
-            try
-            {
-                myCommand.Connection = OpenConnection();
-                myCommand.CommandText = query;
-                myCommand.Parameters.AddRange(sqlParameter);
-                myCommand.ExecuteNonQuery();
-            }
-            catch (SqlException e)
-            {
-                Console.Write("Error - Connection.executeUpdateQuery - Query: "
-                    + query + " \nException: " + e.StackTrace.ToString());
-                return false;
-            }
-            return true;
-        }
-
-        public bool ExecuteDeleteQuery(String query, SqlParameter[] sqlParameter)
-        {
-            SqlCommand myCommand = new SqlCommand();
-            try
-            {
-                myCommand.Connection = OpenConnection();
-                myCommand.CommandText = query;
-                myCommand.Parameters.AddRange(sqlParameter);
-                myCommand.ExecuteNonQuery();
-            }
-            catch (SqlException e)
-            {
-                Console.Write("Error - Connection.executeDeleteQuery - Query: "
-                    + query + " \nException: " + e.StackTrace.ToString());
                 return false;
             }
             return true;

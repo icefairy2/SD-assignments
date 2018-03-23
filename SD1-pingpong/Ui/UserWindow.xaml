@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="UserWindow" Height="431" Width="763">
     <Grid>
-        <ListBox HorizontalAlignment="Left" Height="261" Margin="46,70,0,0" VerticalAlignment="Top" Width="161"/>
+        <ListBox x:Name="tounamentList" HorizontalAlignment="Left" Height="261" Margin="46,70,0,0" VerticalAlignment="Top" Width="161" SelectionChanged="tounamentList_SelectionChanged"/>
         <Label Content="Tournaments" HorizontalAlignment="Left" Margin="84,26,0,0" VerticalAlignment="Top"/>
         <Button Content="Select" HorizontalAlignment="Left" Margin="84,353,0,0" VerticalAlignment="Top" Width="75"/>
         <Grid HorizontalAlignment="Left" Height="54" Margin="248,34,0,0" VerticalAlignment="Top" Width="100">

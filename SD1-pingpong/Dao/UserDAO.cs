@@ -21,6 +21,7 @@ namespace Dao
             {
                 Value = id
             };
+
             SqlDataReader reader = DbConnection.ConnectionInstance.ExecuteSelectQuery(query, sqlParameters);
             var user = new User();
             if (reader.HasRows)
@@ -41,6 +42,7 @@ namespace Dao
                 return null;
             }
             return user;
+
         }
 
         public User FindByName(string userName)
@@ -51,6 +53,7 @@ namespace Dao
             {
                 Value = Convert.ToString(userName)
             };
+
             SqlDataReader reader = DbConnection.ConnectionInstance.ExecuteSelectQuery(query, sqlParameters);
             var user = new User();
             if (reader.HasRows)
@@ -71,6 +74,7 @@ namespace Dao
                 return null;
             }
             return user;
+
         }
 
         public User FindByEmail(string email)
@@ -81,6 +85,7 @@ namespace Dao
             {
                 Value = Convert.ToString(email)
             };
+
             SqlDataReader reader = DbConnection.ConnectionInstance.ExecuteSelectQuery(query, sqlParameters);
             var user = new User();
             if (reader.HasRows)
@@ -100,6 +105,7 @@ namespace Dao
                 return null;
             }
             return user;
+
         }
 
         public List<User> FindAllUsers()
@@ -128,6 +134,7 @@ namespace Dao
                 return null;
             }
             return userList;
+
         }
 
         public bool CreateUser(User user)
@@ -150,7 +157,13 @@ namespace Dao
             {
                 Value = ((user.IsAdmin) ? 1 : 0)
             };
-            return DbConnection.ConnectionInstance.ExecuteInsertQuery(query, sqlParameters);
+            if (DbConnection.ConnectionInstance.ExecuteParameterQuery(query, sqlParameters))
+            {
+                DbConnection.ConnectionInstance.CloseConnection();
+                return true;
+            }
+
+            return false;
         }
 
         public bool UpdateUser(User user)
@@ -173,7 +186,13 @@ namespace Dao
             {
                 Value = Convert.ToString(user.Email)
             };
-            return DbConnection.ConnectionInstance.ExecuteDeleteQuery(query, sqlParameters);
+            if (DbConnection.ConnectionInstance.ExecuteParameterQuery(query, sqlParameters))
+            {
+                DbConnection.ConnectionInstance.CloseConnection();
+                return true;
+            }
+
+            return false;
         }
 
         public bool DeleteUser(User user)
@@ -184,7 +203,13 @@ namespace Dao
             {
                 Value = Convert.ToString(user.Email)
             };
-            return DbConnection.ConnectionInstance.ExecuteDeleteQuery(query, sqlParameters);
+            if (DbConnection.ConnectionInstance.ExecuteParameterQuery(query, sqlParameters))
+            {
+                DbConnection.ConnectionInstance.CloseConnection();
+                return true;
+            }
+
+            return false;
         }
     }
 }

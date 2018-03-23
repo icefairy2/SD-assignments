@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Business;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,20 +28,38 @@ namespace Ui
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            // todo: call controller to do the authentication from DB
-            var admin = false;
+            string emailText = emailBox.Text;
+            string passwordText = passwordBox.Password.ToString();
 
-            if(admin)
+            var login = new Login();
+            var loginType = login.Execute(emailText, passwordText);
+
+            switch (loginType)
             {
-                var adminWindow = new AdminWindow();
-                adminWindow.Show();
-                this.Close();
-            }
-            else
-            {
-                var userWindow = new UserWindow();
-                userWindow.Show();
-                this.Close();
+                case Login.UserLoginType.nonexistent_user:
+                    {
+                        var result = MessageBox.Show("User does not exist!");
+                        break;
+                    }
+                case Login.UserLoginType.incorrect_password:
+                    {
+                        var result = MessageBox.Show("Incorrect password!");
+                        break;
+                    }
+                case Login.UserLoginType.administrator:
+                    {
+                        var adminWindow = new AdminWindow();
+                        adminWindow.Show();
+                        this.Close();
+                        break;
+                    }
+                case Login.UserLoginType.player:
+                    {
+                        var userWindow = new UserWindow();
+                        userWindow.Show();
+                        this.Close();
+                        break;
+                    }
             }
         }
 

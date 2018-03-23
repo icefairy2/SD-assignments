@@ -20,6 +20,7 @@ namespace Dao
 
         public List<Tournament> FindAllTournaments()
         {
+
             string query = string.Format("select * from dbo.Tournament;");
             SqlDataReader reader = DbConnection.ConnectionInstance.ExecuteSelectAllQuery(query);
             var tournamentList = new List<Tournament>();
@@ -33,7 +34,7 @@ namespace Dao
                         Name = reader["name"].ToString(),
                         Status = reader["status"].ToString()
                     };
-                    tournament.Matches = _matchDAO.FindAllTournamentMatches(tournament);
+                    //tournament.Matches = _matchDAO.FindAllTournamentMatches(tournament);
                     tournamentList.Add(tournament);
                 }
                 DbConnection.ConnectionInstance.CloseConnection();
@@ -43,6 +44,7 @@ namespace Dao
                 return null;
             }
             return tournamentList;
+
         }
 
         public bool CreateTournament(Tournament tournament)
@@ -57,7 +59,13 @@ namespace Dao
             {
                 Value = tournament.Status
             };
-            return DbConnection.ConnectionInstance.ExecuteInsertQuery(query, sqlParameters);
+            if (DbConnection.ConnectionInstance.ExecuteParameterQuery(query, sqlParameters))
+            {
+                DbConnection.ConnectionInstance.CloseConnection();
+                return true;
+            }
+
+            return false;
         }
 
         public bool UpdateTournament(Tournament tournament)
@@ -76,7 +84,13 @@ namespace Dao
             {
                 Value = tournament.Status
             };
-            return DbConnection.ConnectionInstance.ExecuteDeleteQuery(query, sqlParameters);
+            if (DbConnection.ConnectionInstance.ExecuteParameterQuery(query, sqlParameters))
+            {
+                DbConnection.ConnectionInstance.CloseConnection();
+                return true;
+            }
+
+            return false;
         }
 
         public bool DeleteTournament(Tournament Tournament)
@@ -87,7 +101,13 @@ namespace Dao
             {
                 Value = Tournament.Id
             };
-            return DbConnection.ConnectionInstance.ExecuteDeleteQuery(query, sqlParameters);
+            if (DbConnection.ConnectionInstance.ExecuteParameterQuery(query, sqlParameters))
+            {
+                DbConnection.ConnectionInstance.CloseConnection();
+                return true;
+            }
+
+            return false;
         }
     }
 }

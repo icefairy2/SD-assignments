@@ -10,11 +10,12 @@ using System.Threading.Tasks;
 namespace Dao
 {
     public class GameDAO
-    { 
+    {
 
         public List<Game> FindAllGames()
         {
             string query = string.Format("select * from dbo.Game;");
+
             SqlDataReader reader = DbConnection.ConnectionInstance.ExecuteSelectAllQuery(query);
             var gameList = new List<Game>();
             if (reader.HasRows)
@@ -46,6 +47,7 @@ namespace Dao
             {
                 Value = match.Id
             };
+
             SqlDataReader reader = DbConnection.ConnectionInstance.ExecuteSelectQuery(query, sqlParameters);
             var gameList = new List<Game>();
             if (reader.HasRows)
@@ -67,6 +69,7 @@ namespace Dao
                 return null;
             }
             return gameList;
+
         }
 
         public bool CreateGame(Game game, Match match)
@@ -85,7 +88,13 @@ namespace Dao
             {
                 Value = match.Id
             };
-            return DbConnection.ConnectionInstance.ExecuteInsertQuery(query, sqlParameters);
+            if (DbConnection.ConnectionInstance.ExecuteParameterQuery(query, sqlParameters))
+            {
+                DbConnection.ConnectionInstance.CloseConnection();
+                return true;
+            }
+
+            return false;
         }
 
         public bool UpdateGame(Game game)
@@ -104,7 +113,13 @@ namespace Dao
             {
                 Value = game.Score2
             };
-            return DbConnection.ConnectionInstance.ExecuteDeleteQuery(query, sqlParameters);
+            if (DbConnection.ConnectionInstance.ExecuteParameterQuery(query, sqlParameters))
+            {
+                DbConnection.ConnectionInstance.CloseConnection();
+                return true;
+            }
+
+            return false;
         }
 
         public bool DeleteGame(Game game)
@@ -115,7 +130,13 @@ namespace Dao
             {
                 Value = game.Id
             };
-            return DbConnection.ConnectionInstance.ExecuteDeleteQuery(query, sqlParameters);
+            if (DbConnection.ConnectionInstance.ExecuteParameterQuery(query, sqlParameters))
+            {
+                DbConnection.ConnectionInstance.CloseConnection();
+                return true;
+            }
+
+            return false;
         }
     }
 }

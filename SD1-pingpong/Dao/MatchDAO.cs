@@ -23,6 +23,7 @@ namespace Dao
         public List<Match> FindAllMatches()
         {
             string query = string.Format("select * from dbo.Match;");
+
             SqlDataReader reader = DbConnection.ConnectionInstance.ExecuteSelectAllQuery(query);
             var matchList = new List<Match>();
             int idPlayer1, idPlayer2;
@@ -34,10 +35,10 @@ namespace Dao
                     match.Id = (int)reader["id"];
                     match.Time = (DateTime)reader["time"];
                     idPlayer1 = (int)reader["player1"];
-                    match.Player1 = _userDAO.FindById(idPlayer1);
+                    //match.Player1 = _userDAO.FindById(idPlayer1);
                     idPlayer2 = (int)reader["player2"];
                     match.Player2 = _userDAO.FindById(idPlayer2);
-                    match.Games = _gameDAO.FindAllMatchGames(match);
+                    //match.Games = _gameDAO.FindAllMatchGames(match);
                     matchList.Add(match);
                 }
                 DbConnection.ConnectionInstance.CloseConnection();
@@ -47,6 +48,7 @@ namespace Dao
                 return null;
             }
             return matchList;
+
         }
 
         public List<Match> FindAllTournamentMatches(Tournament tournament)
@@ -57,6 +59,7 @@ namespace Dao
             {
                 Value = tournament.Id
             };
+
             SqlDataReader reader = DbConnection.ConnectionInstance.ExecuteSelectQuery(query, sqlParameters);
             var matchList = new List<Match>();
             int idPlayer1, idPlayer2;
@@ -68,10 +71,10 @@ namespace Dao
                     match.Id = (int)reader["id"];
                     match.Time = (DateTime)reader["time"];
                     idPlayer1 = (int)reader["player1"];
-                    match.Player1 = _userDAO.FindById(idPlayer1);
+                    //match.Player1 = _userDAO.FindById(idPlayer1);
                     idPlayer2 = (int)reader["player2"];
                     match.Player2 = _userDAO.FindById(idPlayer2);
-                    var matchGameList = _gameDAO.FindAllMatchGames(match);
+                    //var matchGameList = _gameDAO.FindAllMatchGames(match);
                     matchList.Add(match);
                 }
                 DbConnection.ConnectionInstance.CloseConnection();
@@ -81,6 +84,7 @@ namespace Dao
                 return null;
             }
             return matchList;
+
         }
 
         public bool CreateMatch(Match match, User player1, User player2, Tournament tournament)
@@ -103,7 +107,13 @@ namespace Dao
             {
                 Value = tournament.Id
             };
-            return DbConnection.ConnectionInstance.ExecuteInsertQuery(query, sqlParameters);
+            if (DbConnection.ConnectionInstance.ExecuteParameterQuery(query, sqlParameters))
+            {
+                DbConnection.ConnectionInstance.CloseConnection();
+                return true;
+            }
+
+            return false;
         }
 
         public bool UpdateMatch(Match match)
@@ -118,7 +128,14 @@ namespace Dao
             {
                 Value = match.Id
             };
-            return DbConnection.ConnectionInstance.ExecuteDeleteQuery(query, sqlParameters);
+
+            if (DbConnection.ConnectionInstance.ExecuteParameterQuery(query, sqlParameters))
+            {
+                DbConnection.ConnectionInstance.CloseConnection();
+                return true;
+            }
+
+            return false;
         }
 
         public bool DeleteMatch(Match match)
@@ -129,7 +146,13 @@ namespace Dao
             {
                 Value = match.Id
             };
-            return DbConnection.ConnectionInstance.ExecuteDeleteQuery(query, sqlParameters);
+            if (DbConnection.ConnectionInstance.ExecuteParameterQuery(query, sqlParameters))
+            {
+                DbConnection.ConnectionInstance.CloseConnection();
+                return true;
+            }
+
+            return false;
         }
     }
 }

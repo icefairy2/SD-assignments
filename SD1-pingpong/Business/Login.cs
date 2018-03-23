@@ -18,25 +18,32 @@ namespace Business
             _userDAO = new UserDAO();
         }
 
+        public enum UserLoginType
+        {
+            nonexistent_user = 1,
+            incorrect_password = 2,
+            administrator = 3,
+            player = 4
+        }
 
-        public string Execute(string email, string password)
+        public UserLoginType Execute(string email, string password)
         {
 
             var user = _userDAO.FindByEmail(email);
             if (user == null)
             {
-                return "nonexistent_user";
+                return UserLoginType.nonexistent_user;
             }
             if (user.Password != password)
             {
-                return "incorrect_password";
+                return UserLoginType.incorrect_password;
             }
             if (user.IsAdmin)
             {
-                return "administrator";
+                return UserLoginType.administrator;
             } else
             {
-                return "player";
+                return UserLoginType.player;
             }
         }
     }

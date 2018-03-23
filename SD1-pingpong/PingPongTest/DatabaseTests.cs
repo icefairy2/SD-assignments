@@ -13,8 +13,8 @@ namespace PingPongTest
         [TestMethod]
         public void DatabaseConnectionTest()
         {
-            var dbConnection = new DbConnection();
-            var sqlConnection = dbConnection.OpenConnection();
+            var sqlConnection = DbConnection.ConnectionInstance.ActualConnection;
+            DbConnection.ConnectionInstance.OpenConnection();
             Assert.AreEqual(sqlConnection.State, System.Data.ConnectionState.Open);
             Assert.AreEqual(sqlConnection.ConnectionString, "Data Source=DESKTOP-R95RP8R;Initial Catalog=pingpong;Integrated Security=True");
             Assert.AreEqual(sqlConnection.Database, "pingpong");
@@ -52,7 +52,7 @@ namespace PingPongTest
             {
                 Value = 0
             };
-            Assert.IsTrue(dbConnection.ExecuteInsertQuery(query, sqlParameters));
+            Assert.IsTrue(dbConnection.ExecuteParameterQuery(query, sqlParameters));
         }
     }
 }
