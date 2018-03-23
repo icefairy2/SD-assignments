@@ -4,3 +4,6 @@ D:\VSprojects\SD1-pingpong-repo\SD1-pingpong\Dao\obj\Debug\Dao.csprojResolveAsse
 D:\VSprojects\SD1-pingpong-repo\SD1-pingpong\Dao\obj\Debug\Dao.csproj.CoreCompileInputs.cache
 D:\VSprojects\SD1-pingpong-repo\SD1-pingpong\Dao\obj\Debug\Dao.dll
 D:\VSprojects\SD1-pingpong-repo\SD1-pingpong\Dao\obj\Debug\Dao.pdb
+D:\VSprojects\SD1-pingpong-repo\SD1-pingpong\Dao\bin\Debug\Entity.dll
+D:\VSprojects\SD1-pingpong-repo\SD1-pingpong\Dao\bin\Debug\Entity.pdb
+D:\VSprojects\SD1-pingpong-repo\SD1-pingpong\Dao\obj\Debug\Dao.csproj.CopyComplete

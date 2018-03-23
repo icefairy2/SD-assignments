@@ -8,6 +8,7 @@ namespace Entity
 {
     public class Tournament
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Status { get; set; }
         public IList<Match> Matches { get; set; }
@@ -15,6 +16,7 @@ namespace Entity
         public Tournament()
         {
             Matches = new List<Match>();
+            Status = "tba";
         }
 
         public Tournament(string name)

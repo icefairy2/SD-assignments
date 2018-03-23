@@ -12,38 +12,127 @@ namespace Dao
 {
     public class UserDAO
     {
-        private DbConnection _conn;
 
-        public UserDAO()
+        public User FindById(int id)
         {
-            _conn = new DbConnection();
+            string query = string.Format("select * from dbo.Player where id = @id");
+            var sqlParameters = new SqlParameter[1];
+            sqlParameters[0] = new SqlParameter("@id", SqlDbType.VarChar)
+            {
+                Value = id
+            };
+            SqlDataReader reader = DbConnection.ConnectionInstance.ExecuteSelectQuery(query, sqlParameters);
+            var user = new User();
+            if (reader.HasRows)
+            {
+
+                while (reader.Read())
+                {
+                    user.Id = (int)reader["id"];
+                    user.Email = (string)reader["email"];
+                    user.Name = (string)reader["name"];
+                    user.Password = (string)reader["password"];
+                    user.IsAdmin = (bool)reader["isAdmin"];
+                }
+                DbConnection.ConnectionInstance.CloseConnection();
+            }
+            else
+            {
+                return null;
+            }
+            return user;
         }
 
-        public DataTable FindByName(string userName)
+        public User FindByName(string userName)
         {
-            string query = string.Format("select * from player where name = @userName ");
-            SqlParameter[] sqlParameters = new SqlParameter[1];
-            sqlParameters[0] = new SqlParameter("@userName", SqlDbType.VarChar)
+            string query = string.Format("select * from dbo.Player where name = @name");
+            var sqlParameters = new SqlParameter[1];
+            sqlParameters[0] = new SqlParameter("@name", SqlDbType.VarChar)
             {
                 Value = Convert.ToString(userName)
             };
-            return _conn.ExecuteSelectQuery(query, sqlParameters);
+            SqlDataReader reader = DbConnection.ConnectionInstance.ExecuteSelectQuery(query, sqlParameters);
+            var user = new User();
+            if (reader.HasRows)
+            {
+
+                while (reader.Read())
+                {
+                    user.Id = (int)reader["id"];
+                    user.Email = (string)reader["email"];
+                    user.Name = (string)reader["name"];
+                    user.Password = (string)reader["password"];
+                    user.IsAdmin = (bool)reader["isAdmin"];
+                }
+                DbConnection.ConnectionInstance.CloseConnection();
+            }
+            else
+            {
+                return null;
+            }
+            return user;
         }
 
-        public DataTable FindByEmail(string email)
+        public User FindByEmail(string email)
         {
-            string query = string.Format("select * from user where email = @email ");
+            string query = string.Format("select * from dbo.Users where email = @email");
             var sqlParameters = new SqlParameter[1];
             sqlParameters[0] = new SqlParameter("@email", SqlDbType.VarChar)
             {
                 Value = Convert.ToString(email)
             };
-            return _conn.ExecuteSelectQuery(query, sqlParameters);
+            SqlDataReader reader = DbConnection.ConnectionInstance.ExecuteSelectQuery(query, sqlParameters);
+            var user = new User();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    user.Id = (int)reader["id"];
+                    user.Email = reader["email"].ToString();
+                    user.Name = reader["name"].ToString();
+                    user.Password = reader["password"].ToString();
+                    user.IsAdmin = (bool)reader["isAdmin"];
+                }
+                DbConnection.ConnectionInstance.CloseConnection();
+            }
+            else
+            {
+                return null;
+            }
+            return user;
+        }
+
+        public List<User> FindAllUsers()
+        {
+            string query = string.Format("select * from dbo.Users;");
+            SqlDataReader reader = DbConnection.ConnectionInstance.ExecuteSelectAllQuery(query);
+            var userList = new List<User>();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    var user = new User
+                    {
+                        Id = (int)reader["id"],
+                        Email = reader["email"].ToString(),
+                        Name = reader["name"].ToString(),
+                        Password = reader["password"].ToString(),
+                        IsAdmin = (bool)reader["isAdmin"]
+                    };
+                    userList.Add(user);
+                }
+                DbConnection.ConnectionInstance.CloseConnection();
+            }
+            else
+            {
+                return null;
+            }
+            return userList;
         }
 
         public bool CreateUser(User user)
         {
-            string query = string.Format("insert into user (email, name, password, isAdmin) values (@email, @name, @password, @isAdmin); ");
+            string query = string.Format("insert into dbo.Users (email, name, password, isAdmin) values (@email, @name, @password, @isAdmin); ");
             var sqlParameters = new SqlParameter[4];
             sqlParameters[0] = new SqlParameter("@email", SqlDbType.VarChar)
             {
@@ -59,14 +148,14 @@ namespace Dao
             };
             sqlParameters[3] = new SqlParameter("@isAdmin", SqlDbType.Bit)
             {
-                Value = ((user.IsAdmin)? 1:0)
+                Value = ((user.IsAdmin) ? 1 : 0)
             };
-            return _conn.ExecuteInsertQuery(query, sqlParameters);
+            return DbConnection.ConnectionInstance.ExecuteInsertQuery(query, sqlParameters);
         }
 
         public bool UpdateUser(User user)
         {
-            string query = string.Format("update user set name = @name, password = @password, isAdmin = @isAdmin WHERE email = @email; ");
+            string query = string.Format("update dbo.Users set name = @name, password = @password, isAdmin = @isAdmin WHERE email = @email; ");
             var sqlParameters = new SqlParameter[4];
             sqlParameters[0] = new SqlParameter("@name", SqlDbType.VarChar)
             {
@@ -84,18 +173,18 @@ namespace Dao
             {
                 Value = Convert.ToString(user.Email)
             };
-            return _conn.ExecuteDeleteQuery(query, sqlParameters);
+            return DbConnection.ConnectionInstance.ExecuteDeleteQuery(query, sqlParameters);
         }
 
         public bool DeleteUser(User user)
         {
-            string query = string.Format("delete from user where email = @email ");
+            string query = string.Format("delete from dbo.Users where email = @email ");
             var sqlParameters = new SqlParameter[1];
             sqlParameters[0] = new SqlParameter("@email", SqlDbType.VarChar)
             {
                 Value = Convert.ToString(user.Email)
             };
-            return _conn.ExecuteDeleteQuery(query, sqlParameters);
+            return DbConnection.ConnectionInstance.ExecuteDeleteQuery(query, sqlParameters);
         }
     }
 }

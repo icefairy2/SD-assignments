@@ -14,3 +14,5 @@ D:\VSprojects\SD1-pingpong-repo\SD1-pingpong\PingPongTest\obj\Debug\PingPongTest
 D:\VSprojects\SD1-pingpong-repo\SD1-pingpong\PingPongTest\obj\Debug\PingPongTest.csproj.CopyComplete
 D:\VSprojects\SD1-pingpong-repo\SD1-pingpong\PingPongTest\obj\Debug\PingPongTest.dll
 D:\VSprojects\SD1-pingpong-repo\SD1-pingpong\PingPongTest\obj\Debug\PingPongTest.pdb
+D:\VSprojects\SD1-pingpong-repo\SD1-pingpong\PingPongTest\bin\Debug\Entity.dll
+D:\VSprojects\SD1-pingpong-repo\SD1-pingpong\PingPongTest\bin\Debug\Entity.pdb

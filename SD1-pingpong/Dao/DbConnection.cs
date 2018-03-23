@@ -11,16 +11,16 @@ namespace Dao
 {
     public class DbConnection
     {
-        private SqlDataAdapter myAdapter;
         private SqlConnection conn;
         private string dbConnectionString = "Data Source=DESKTOP-R95RP8R;Initial Catalog=pingpong;Integrated Security=True";
+
+        public static DbConnection ConnectionInstance = new DbConnection();
 
         /// <summary>
         /// Initialise Connection
         /// </summary>
         public DbConnection()
         {
-            myAdapter = new SqlDataAdapter();
             conn = new SqlConnection(dbConnectionString);
         }
 
@@ -54,105 +54,97 @@ namespace Dao
         /// Method for executing a query
         /// </summary>
         /// <param name="query">The query to execute</param>
-        /// <param name="sqlParameter">the sql parameters for the given query</param>
-        /// <returns>A datatable result</returns>
-        public DataTable ExecuteSelectQuery(String query, SqlParameter[] sqlParameter)
+        /// <returns>A sqlreader result</returns>
+        public SqlDataReader ExecuteSelectQuery(String query, SqlParameter[] sqlParameter)
         {
-            SqlCommand myCommand = new SqlCommand();
-            DataTable dataTable = new DataTable();
-            dataTable = null;
-            DataSet ds = new DataSet();
+            var myCommand = new SqlCommand();
+            try
+            {
+                myCommand.Connection = OpenConnection();
+                myCommand.CommandText = query;
+                myCommand.Parameters.AddRange(sqlParameter);
+                SqlDataReader reader = myCommand.ExecuteReader();
+                return reader;
+            }
+            catch (SqlException e)
+            {
+                Console.Write("Error - Connection.executeSelectQuery - Query: "
+                    + query + " \nException: " + e.StackTrace.ToString());
+                return null;
+            }            
+        }
+
+        public SqlDataReader ExecuteSelectAllQuery(String query)
+        {
+            var myCommand = new SqlCommand();
+            try
+            {
+                myCommand.Connection = OpenConnection();
+                myCommand.CommandText = query;
+                SqlDataReader reader = myCommand.ExecuteReader();
+                return reader;
+            }
+            catch (SqlException e)
+            {
+                Console.Write("Error - Connection.executeSelectQuery - Query: "
+                    + query + " \nException: " + e.StackTrace.ToString());
+                return null;
+            }
+        }
+
+        public bool ExecuteInsertQuery(String query, SqlParameter[] sqlParameter)
+        {
+            var myCommand = new SqlCommand();
             try
             {
                 myCommand.Connection = OpenConnection();
                 myCommand.CommandText = query;
                 myCommand.Parameters.AddRange(sqlParameter);
                 myCommand.ExecuteNonQuery();
-                myAdapter.SelectCommand = myCommand;
-                myAdapter.Fill(ds);
-                dataTable = ds.Tables[0];
-            }
-            catch (SqlException e)
-            {
-                Console.Write("Error - Connection.executeSelectQuery - Query: " 
-                    + query + " \nException: " + e.StackTrace.ToString());
-                return null;
-            }
-            finally
-            {
-                myCommand.Connection = CloseConnection();
-            }
-            return dataTable;
-        }
-
-        public bool ExecuteInsertQuery(String _query, SqlParameter[] sqlParameter)
-        {
-            SqlCommand myCommand = new SqlCommand();
-            try
-            {
-                myCommand.Connection = OpenConnection();
-                myCommand.CommandText = _query;
-                myCommand.Parameters.AddRange(sqlParameter);
-                myAdapter.InsertCommand = myCommand;
-                myCommand.ExecuteNonQuery();
             }
             catch (SqlException e)
             {
                 Console.Write("Error - Connection.executeInsertQuery - Query: " 
-                    + _query + " \nException: \n" + e.StackTrace.ToString());
+                    + query + " \nException: \n" + e.StackTrace.ToString());
                 return false;
-            }
-            finally
-            {
-                myCommand.Connection = CloseConnection();
             }
             return true;
         }
 
-        public bool ExecuteUpdateQuery(String _query, SqlParameter[] sqlParameter)
+        public bool ExecuteUpdateQuery(String query, SqlParameter[] sqlParameter)
         {
             SqlCommand myCommand = new SqlCommand();
             try
             {
                 myCommand.Connection = OpenConnection();
-                myCommand.CommandText = _query;
+                myCommand.CommandText = query;
                 myCommand.Parameters.AddRange(sqlParameter);
-                myAdapter.UpdateCommand = myCommand;
                 myCommand.ExecuteNonQuery();
             }
             catch (SqlException e)
             {
                 Console.Write("Error - Connection.executeUpdateQuery - Query: "
-                    + _query + " \nException: " + e.StackTrace.ToString());
+                    + query + " \nException: " + e.StackTrace.ToString());
                 return false;
-            }
-            finally
-            {
-                myCommand.Connection = CloseConnection();
             }
             return true;
         }
 
-        public bool ExecuteDeleteQuery(String _query, SqlParameter[] sqlParameter)
+        public bool ExecuteDeleteQuery(String query, SqlParameter[] sqlParameter)
         {
             SqlCommand myCommand = new SqlCommand();
             try
             {
                 myCommand.Connection = OpenConnection();
-                myCommand.CommandText = _query;
+                myCommand.CommandText = query;
                 myCommand.Parameters.AddRange(sqlParameter);
-                myAdapter.DeleteCommand = myCommand;
                 myCommand.ExecuteNonQuery();
             }
             catch (SqlException e)
             {
                 Console.Write("Error - Connection.executeDeleteQuery - Query: "
-                    + _query + " \nException: " + e.StackTrace.ToString());
+                    + query + " \nException: " + e.StackTrace.ToString());
                 return false;
-            }
-            finally
-            {
-                myCommand.Connection = CloseConnection();
             }
             return true;
         }

@@ -8,6 +8,7 @@ namespace Entity
 {
     public class Match
     {
+        public int Id { get; set; }
         public DateTime Time { get; set; }
         public User Player1 { get; set; }
         public User Player2 { get; set; }

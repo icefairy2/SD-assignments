@@ -42,6 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DbConnection.cs" />
+    <Compile Include="GameDAO.cs" />
+    <Compile Include="MatchDAO.cs" />
+    <Compile Include="TournamentDAO.cs" />
     <Compile Include="UserDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

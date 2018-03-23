@@ -9,6 +9,11 @@ namespace Entity
     public class User
     {
         /// <summary>
+        /// The id of the player in the database
+        /// </summary>
+        public int Id { get; set; }
+
+        /// <summary>
         /// The player name
         /// </summary>
         public string Name { get; set; }
@@ -33,7 +38,7 @@ namespace Entity
 
         }
 
-        public User(string name, string password, string email)
+        public User(string name, string email, string password)
         {
             Name = name;
             Password = password;
@@ -41,7 +46,7 @@ namespace Entity
             IsAdmin = false;
         }
 
-        public User(string name, string password, string email, bool isAdmin) : this(name, password, email)
+        public User(string name, string email, string password, bool isAdmin) : this(name, email, password)
         {
             IsAdmin = isAdmin;
         }
