@@ -12,10 +12,16 @@ namespace Business
     {
         private TournamentDAO _tournamentDAO;
 
-        public List<Tournament> Execute()
+        public List<Tournament> GetAll()
         {
             _tournamentDAO = new TournamentDAO();
             return _tournamentDAO.FindAllTournaments();
+        }
+
+        public Tournament GetByName(string name)
+        {
+            _tournamentDAO = new TournamentDAO();
+            return _tournamentDAO.FindTourmanentByName(name);
         }
     }
 }

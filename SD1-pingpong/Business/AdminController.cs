@@ -25,6 +25,10 @@ namespace Business
         /// <param name="password">The password of the player</param>
         public bool AddPlayer(string email, string name, string password)
         {
+            if (!IsValidEmail(email))
+            {
+                return false;
+            }
             var player = new User(name, email, password, false);
             var userDAO = new UserDAO();
             return userDAO.CreateUser(player);
@@ -90,6 +94,19 @@ namespace Business
         {
             //return _tournamentDAO.(new Tournament(name));
             return true;
+        }
+
+        private bool IsValidEmail(string email)
+        {
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == email;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

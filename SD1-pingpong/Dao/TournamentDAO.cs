@@ -34,8 +34,13 @@ namespace Dao
                         Name = reader["name"].ToString(),
                         Status = reader["status"].ToString()
                     };
-                    tournament.Matches = _matchDAO.FindAllTournamentMatches(tournament);
+                    //tournament.Matches = _matchDAO.FindAllTournamentMatches(tournament);
                     tournamentList.Add(tournament);
+                }
+                DbConnection.ConnectionInstance.CloseConnection();
+                foreach (var tournament in tournamentList)
+                {
+                    tournament.Matches = _matchDAO.FindAllTournamentMatches(tournament);
                 }
                 DbConnection.ConnectionInstance.CloseConnection();
             }
@@ -46,32 +51,33 @@ namespace Dao
             return tournamentList;
         }
 
-        public List<Tournament> FindTourmanentById()
+        public Tournament FindTourmanentByName(string name)
         {
-
-            string query = string.Format("select * from dbo.Tournament;");
-            SqlDataReader reader = DbConnection.ConnectionInstance.ExecuteSelectAllQuery(query);
-            var tournamentList = new List<Tournament>();
+            string query = string.Format("select * from dbo.Tournament where [name] = @name");
+            var sqlParameters = new SqlParameter[1];
+            sqlParameters[0] = new SqlParameter("@name", SqlDbType.VarChar)
+            {
+                Value = name
+            };
+            SqlDataReader reader = DbConnection.ConnectionInstance.ExecuteSelectQuery(query, sqlParameters);
+            var tournament = new Tournament();
             if (reader.HasRows)
             {
                 while (reader.Read())
                 {
-                    var tournament = new Tournament
-                    {
-                        Id = (int)reader["id"],
-                        Name = reader["name"].ToString(),
-                        Status = reader["status"].ToString()
-                    };
-                    tournament.Matches = _matchDAO.FindAllTournamentMatches(tournament);
-                    tournamentList.Add(tournament);
+                    tournament.Id = (int)reader["id"];
+                    tournament.Name = reader["name"].ToString();
+                    tournament.Status = reader["status"].ToString();
                 }
+                DbConnection.ConnectionInstance.CloseConnection();
+                tournament.Matches = _matchDAO.FindAllTournamentMatches(tournament);
                 DbConnection.ConnectionInstance.CloseConnection();
             }
             else
             {
                 return null;
             }
-            return tournamentList;
+            return tournament;
 
         }
 

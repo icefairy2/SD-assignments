@@ -26,7 +26,7 @@ namespace Ui
         {
             InitializeComponent();
             var getTournaments = new GetTournaments();
-            var allTournaments = getTournaments.Execute();
+            var allTournaments = getTournaments.GetAll();
             foreach(Tournament trn in allTournaments)
             {
                 tounamentList.Items.Add(trn.Name);

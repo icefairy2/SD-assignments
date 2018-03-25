@@ -11,6 +11,7 @@ namespace Business
     public class CreateMatches
     {
         private MatchDAO matchDao = new MatchDAO();
+        private UserDAO userDAO = new UserDAO();
 
         private static Random rng = new Random();
 
@@ -27,8 +28,14 @@ namespace Business
             }
         }
 
-        public bool Execute(Tournament tournament, IList<User> players)
+        public bool Execute(Tournament tournament, IList<User> emptyPlayers)
         {
+            var players = new List<User>(); 
+            foreach (var player in emptyPlayers)
+            {
+                players.Add(userDAO.FindByName(player.Name));
+            }
+
             Shuffle(players);
             for(int i=0; i<players.Count;i+=2)
             {

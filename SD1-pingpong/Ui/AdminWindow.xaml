@@ -25,7 +25,7 @@
         <Button x:Name="addTournamentButton" Content="Add Tournament" HorizontalAlignment="Left" Margin="401,156,0,0" VerticalAlignment="Top" Width="120" Click="addTournamentButton_Click"/>
         <Button x:Name="findTournamentButton" Content="Find Tournament" HorizontalAlignment="Left" Margin="401,195,0,0" VerticalAlignment="Top" Width="120" Click="findTournamentButton_Click"/>
         <Button x:Name="updateTournamentButton" Content="Update Tournament" HorizontalAlignment="Left" Margin="401,234,0,0" VerticalAlignment="Top" Width="120"/>
-        <Button Content="Select" HorizontalAlignment="Left" Margin="648,372,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Content="Refresh" HorizontalAlignment="Left" Margin="630,367,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
         <ListBox x:Name="playersListbox" Margin="553,33,14.6,71"
                  VerticalAlignment="Stretch"
                  ItemsSource="{Binding Items}"
@@ -38,7 +38,7 @@
                         <Setter.Value>
                             <ControlTemplate TargetType="ListBoxItem">
                                 <CheckBox Margin="5,2"
-                                          IsChecked="{TemplateBinding IsSelected}">
+                                          IsChecked="{Binding IsSelected, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}, Mode=TwoWay}">
                                     <ContentPresenter />
                                 </CheckBox>
                             </ControlTemplate>

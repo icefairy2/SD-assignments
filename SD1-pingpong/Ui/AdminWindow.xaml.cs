@@ -28,6 +28,12 @@ namespace Ui
         {
             InitializeComponent();
             _adminController = new AdminController();
+            updatePlayers();
+        }
+
+        private void updatePlayers()
+        {
+            playersListbox.Items.Clear();
             var getPlayers = new GetPlayers();
             var allPlayers = getPlayers.Execute();
             foreach (User user in allPlayers)
@@ -50,6 +56,7 @@ namespace Ui
             if (succeded)
             {
                 MessageBox.Show($"Successfully added player \'{playerNameTextbox.Text}\'");
+                updatePlayers();
             }
             else
             {
@@ -119,7 +126,7 @@ namespace Ui
 
         private void addTournamentButton_Click(object sender, RoutedEventArgs e)
         {
-            
+            var tournamentName = tournamentNameTextbox.Text;
 
             var selectedPlayers = playersListbox.SelectedItems;
             if (selectedPlayers.Count != 8)
@@ -128,11 +135,22 @@ namespace Ui
                 return;
             }
 
-            var succeded = _adminController.AddTournament(tournamentNameTextbox.Text);
+            var succeded = _adminController.AddTournament(tournamentName);
 
             if (succeded)
             {
-                MessageBox.Show($"Successfully added tournament \'{tournamentNameTextbox.Text}\'");
+                MessageBox.Show($"Successfully added tournament \'{tournamentName}\'");
+                var getTournaments = new GetTournaments();
+                var tournament = getTournaments.GetByName(tournamentName);
+                var createMatches = new CreateMatches();
+                var selectedUserList = new List<User>();
+                foreach (var selUser in selectedPlayers)
+                {
+                    var newUser = new User();
+                    newUser.Name = selUser.ToString();
+                    selectedUserList.Add(newUser);
+                }
+                var succeededMatches = createMatches.Execute(tournament, selectedUserList);
             }
             else
             {
@@ -146,7 +164,7 @@ namespace Ui
 
             if (succeded)
             {
-                MessageBox.Show($"Successfully added tournament \'{tournamentNameTextbox.Text}\'");
+                MessageBox.Show($"Successfully found tournament \'{tournamentNameTextbox.Text}\'");
             }
             else
             {
@@ -157,6 +175,11 @@ namespace Ui
         private void playerNameListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            updatePlayers();
         }
     }
 }

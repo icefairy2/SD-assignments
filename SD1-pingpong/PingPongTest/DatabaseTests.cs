@@ -16,7 +16,7 @@ namespace PingPongTest
             var sqlConnection = DbConnection.ConnectionInstance.ActualConnection;
             DbConnection.ConnectionInstance.OpenConnection();
             Assert.AreEqual(sqlConnection.State, System.Data.ConnectionState.Open);
-            Assert.AreEqual(sqlConnection.ConnectionString, "Data Source=DESKTOP-PU1RAF0;Initial Catalog=pingpong;Integrated Security=True");
+            Assert.AreEqual(sqlConnection.ConnectionString, "Data Source=DESKTOP-R95RP8R;Initial Catalog=pingpong;Integrated Security=True");
             Assert.AreEqual(sqlConnection.Database, "pingpong");
         }
 
@@ -53,6 +53,13 @@ namespace PingPongTest
                 Value = 0
             };
             Assert.IsTrue(dbConnection.ExecuteParameterQuery(query, sqlParameters));
+            string delQuery = string.Format("delete from dbo.Users where email = @email ");
+            var delSqlParameters = new SqlParameter[1];
+            delSqlParameters[0] = new SqlParameter("@email", SqlDbType.VarChar)
+            {
+                Value = "email"
+            };
+            Assert.IsTrue(dbConnection.ExecuteParameterQuery(delQuery, delSqlParameters));
         }
     }
 }
