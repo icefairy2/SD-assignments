@@ -39,6 +39,7 @@ namespace Dao
             }
             else
             {
+                DbConnection.ConnectionInstance.CloseConnection();
                 return null;
             }
             return user;
@@ -47,7 +48,7 @@ namespace Dao
 
         public User FindByName(string userName)
         {
-            string query = string.Format("select * from dbo.Player where name = @name");
+            string query = string.Format("select * from dbo.Users where [name] = @name;");
             var sqlParameters = new SqlParameter[1];
             sqlParameters[0] = new SqlParameter("@name", SqlDbType.VarChar)
             {
@@ -71,6 +72,7 @@ namespace Dao
             }
             else
             {
+                DbConnection.ConnectionInstance.CloseConnection();
                 return null;
             }
             return user;
@@ -79,7 +81,7 @@ namespace Dao
 
         public User FindByEmail(string email)
         {
-            string query = string.Format("select * from dbo.Users where email = @email");
+            string query = string.Format("select * from dbo.Users where [email] = @email");
             var sqlParameters = new SqlParameter[1];
             sqlParameters[0] = new SqlParameter("@email", SqlDbType.VarChar)
             {
@@ -102,6 +104,7 @@ namespace Dao
             }
             else
             {
+                DbConnection.ConnectionInstance.CloseConnection();
                 return null;
             }
             return user;
@@ -131,6 +134,7 @@ namespace Dao
             }
             else
             {
+                DbConnection.ConnectionInstance.CloseConnection();
                 return null;
             }
             return userList;
@@ -162,7 +166,7 @@ namespace Dao
                 DbConnection.ConnectionInstance.CloseConnection();
                 return true;
             }
-
+            DbConnection.ConnectionInstance.CloseConnection();
             return false;
         }
 
@@ -191,7 +195,7 @@ namespace Dao
                 DbConnection.ConnectionInstance.CloseConnection();
                 return true;
             }
-
+            DbConnection.ConnectionInstance.CloseConnection();
             return false;
         }
 
@@ -208,7 +212,7 @@ namespace Dao
                 DbConnection.ConnectionInstance.CloseConnection();
                 return true;
             }
-
+            DbConnection.ConnectionInstance.CloseConnection();
             return false;
         }
     }

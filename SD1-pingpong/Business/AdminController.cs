@@ -9,10 +9,12 @@ namespace Business
     public class AdminController
     {
         private UserDAO _userDAO;
+        private TournamentDAO _tournamentDAO;
 
         public AdminController()
         {
             _userDAO = new UserDAO();
+            _tournamentDAO = new TournamentDAO();
         }
 
         /// <summary>
@@ -39,7 +41,8 @@ namespace Business
             var player = _userDAO.FindByEmail(email);
             if (player != null)
             {
-                return _userDAO.UpdateUser(player);
+                var newPlayer = new User(name, email, password);
+                return _userDAO.UpdateUser(newPlayer);
             }
             return false;
         }
@@ -76,6 +79,17 @@ namespace Business
         public User FindByEmail(string email)
         {
             return _userDAO.FindByEmail(email);
+        }
+
+        public bool AddTournament(string name)
+        {
+            return _tournamentDAO.CreateTournament(new Tournament(name));
+        }
+
+        public bool FindTournament(string name)
+        {
+            //return _tournamentDAO.(new Tournament(name));
+            return true;
         }
     }
 }

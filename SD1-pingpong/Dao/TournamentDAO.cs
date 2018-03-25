@@ -34,7 +34,35 @@ namespace Dao
                         Name = reader["name"].ToString(),
                         Status = reader["status"].ToString()
                     };
-                    //tournament.Matches = _matchDAO.FindAllTournamentMatches(tournament);
+                    tournament.Matches = _matchDAO.FindAllTournamentMatches(tournament);
+                    tournamentList.Add(tournament);
+                }
+                DbConnection.ConnectionInstance.CloseConnection();
+            }
+            else
+            {
+                return null;
+            }
+            return tournamentList;
+        }
+
+        public List<Tournament> FindTourmanentById()
+        {
+
+            string query = string.Format("select * from dbo.Tournament;");
+            SqlDataReader reader = DbConnection.ConnectionInstance.ExecuteSelectAllQuery(query);
+            var tournamentList = new List<Tournament>();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    var tournament = new Tournament
+                    {
+                        Id = (int)reader["id"],
+                        Name = reader["name"].ToString(),
+                        Status = reader["status"].ToString()
+                    };
+                    tournament.Matches = _matchDAO.FindAllTournamentMatches(tournament);
                     tournamentList.Add(tournament);
                 }
                 DbConnection.ConnectionInstance.CloseConnection();

@@ -33,7 +33,6 @@ namespace Dao
                 {
                     var match = new Match();
                     match.Id = (int)reader["id"];
-                    match.Time = (DateTime)reader["time"];
                     idPlayer1 = (int)reader["player1"];
                     //match.Player1 = _userDAO.FindById(idPlayer1);
                     idPlayer2 = (int)reader["player2"];
@@ -53,7 +52,7 @@ namespace Dao
 
         public List<Match> FindAllTournamentMatches(Tournament tournament)
         {
-            string query = string.Format("select * from dbo.Match where tournament = @tournament");
+            string query = string.Format("select * from dbo.Match inner join dbo.Tournament on dbo.Match.tournament = @id;");
             var sqlParameters = new SqlParameter[1];
             sqlParameters[0] = new SqlParameter("@id", SqlDbType.VarChar)
             {
@@ -69,7 +68,6 @@ namespace Dao
                 {
                     var match = new Match();
                     match.Id = (int)reader["id"];
-                    match.Time = (DateTime)reader["time"];
                     idPlayer1 = (int)reader["player1"];
                     //match.Player1 = _userDAO.FindById(idPlayer1);
                     idPlayer2 = (int)reader["player2"];
@@ -87,48 +85,22 @@ namespace Dao
 
         }
 
-        public bool CreateMatch(Match match, User player1, User player2, Tournament tournament)
+        public bool CreateMatch(Match match, Tournament tournament)
         {
             string query = string.Format("insert into dbo.Match (time, player1, player2, tournament) values (@time, @player1, @player2, @tournament); ");
-            var sqlParameters = new SqlParameter[4];
-            sqlParameters[0] = new SqlParameter("@time", SqlDbType.VarChar)
+            var sqlParameters = new SqlParameter[3];
+            sqlParameters[0] = new SqlParameter("@player1", SqlDbType.VarChar)
             {
-                Value = match.Time
+                Value = match.Player1.Id
             };
-            sqlParameters[1] = new SqlParameter("@player1", SqlDbType.VarChar)
+            sqlParameters[1] = new SqlParameter("@player2", SqlDbType.VarChar)
             {
-                Value = player1.Id
+                Value = match.Player2.Id
             };
-            sqlParameters[2] = new SqlParameter("@player2", SqlDbType.VarChar)
-            {
-                Value = player2.Id
-            };
-            sqlParameters[3] = new SqlParameter("@tournament", SqlDbType.VarChar)
+            sqlParameters[2] = new SqlParameter("@tournament", SqlDbType.VarChar)
             {
                 Value = tournament.Id
             };
-            if (DbConnection.ConnectionInstance.ExecuteParameterQuery(query, sqlParameters))
-            {
-                DbConnection.ConnectionInstance.CloseConnection();
-                return true;
-            }
-
-            return false;
-        }
-
-        public bool UpdateMatch(Match match)
-        {
-            string query = string.Format("update dbo.Match set time = @time WHERE id = @id; ");
-            var sqlParameters = new SqlParameter[2];
-            sqlParameters[0] = new SqlParameter("@time", SqlDbType.VarChar)
-            {
-                Value = match.Time
-            };
-            sqlParameters[1] = new SqlParameter("@id", SqlDbType.VarChar)
-            {
-                Value = match.Id
-            };
-
             if (DbConnection.ConnectionInstance.ExecuteParameterQuery(query, sqlParameters))
             {
                 DbConnection.ConnectionInstance.CloseConnection();

@@ -9,7 +9,6 @@ namespace Entity
     public class Match
     {
         public int Id { get; set; }
-        public DateTime Time { get; set; }
         public User Player1 { get; set; }
         public User Player2 { get; set; }
         public IList<Game> Games { get; set; }
@@ -19,9 +18,8 @@ namespace Entity
             Games = new List<Game>();
         }
 
-        public Match(DateTime time, User player1, User player2)
+        public Match(User player1, User player2)
         {
-            Time = time;
             Player1 = player1;
             Player2 = player2;
             Games = new List<Game>();

@@ -16,17 +16,37 @@
         <TextBox x:Name="playerNameTextbox" HorizontalAlignment="Left" Height="23" Margin="119,110,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
         <TextBox x:Name="playerEmailTextbox" HorizontalAlignment="Left" Height="23" Margin="119,141,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
         <TextBox x:Name="playerPasswordTextbox" HorizontalAlignment="Left" Height="23" Margin="119,172,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="401,104,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="tournamentNameTextbox" HorizontalAlignment="Left" Height="23" Margin="401,104,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Button x:Name="AddPlayer" Content="Add Player" HorizontalAlignment="Left" Margin="119,228,0,0" VerticalAlignment="Top" Width="150" Click="AddPlayer_Click"/>
         <Button x:Name="SelectPlayerName" Content="Search Player by Name" HorizontalAlignment="Left" Margin="119,267,0,0" VerticalAlignment="Top" Width="150" Click="SelectPlayerName_Click"/>
         <Button x:Name="SelectPlayerEmail" Content="Search Player by E-mail" HorizontalAlignment="Left" Margin="119,292,0,0" VerticalAlignment="Top" Width="150" Click="SelectPlayerEmail_Click"/>
         <Button x:Name="UpdatePlayer" Content="Update Player" HorizontalAlignment="Left" Margin="119,330,0,0" VerticalAlignment="Top" Width="150" Click="UpdatePlayer_Click"/>
         <Button x:Name="DeletePlayer" Content="Delete Player" HorizontalAlignment="Left" Margin="119,367,0,0" VerticalAlignment="Top" Width="150" RenderTransformOrigin="0.16,0.25" Click="DeletePlayer_Click"/>
-        <Button Content="Add Tournament" HorizontalAlignment="Left" Margin="401,156,0,0" VerticalAlignment="Top" Width="120"/>
-        <Button Content="Find Tournament" HorizontalAlignment="Left" Margin="401,195,0,0" VerticalAlignment="Top" Width="120"/>
-        <Button Content="Update Tournament" HorizontalAlignment="Left" Margin="401,234,0,0" VerticalAlignment="Top" Width="120"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="648,372,0,0" VerticalAlignment="Top" Width="75"/>
-        <ListBox HorizontalAlignment="Left" Height="340" Margin="577,10,0,0" VerticalAlignment="Top" Width="205" ScrollViewer.VerticalScrollBarVisibility="Visible" />
-        <Button Content="Delete Tournament" HorizontalAlignment="Left" Margin="401,277,0,0" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="addTournamentButton" Content="Add Tournament" HorizontalAlignment="Left" Margin="401,156,0,0" VerticalAlignment="Top" Width="120" Click="addTournamentButton_Click"/>
+        <Button x:Name="findTournamentButton" Content="Find Tournament" HorizontalAlignment="Left" Margin="401,195,0,0" VerticalAlignment="Top" Width="120" Click="findTournamentButton_Click"/>
+        <Button x:Name="updateTournamentButton" Content="Update Tournament" HorizontalAlignment="Left" Margin="401,234,0,0" VerticalAlignment="Top" Width="120"/>
+        <Button Content="Select" HorizontalAlignment="Left" Margin="648,372,0,0" VerticalAlignment="Top" Width="75"/>
+        <ListBox x:Name="playersListbox" Margin="553,33,14.6,71"
+                 VerticalAlignment="Stretch"
+                 ItemsSource="{Binding Items}"
+                 SelectionMode="Multiple">
+            <ListBox.Resources>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="OverridesDefaultStyle" Value="true" />
+                    <Setter Property="SnapsToDevicePixels" Value="true" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListBoxItem">
+                                <CheckBox Margin="5,2"
+                                          IsChecked="{TemplateBinding IsSelected}">
+                                    <ContentPresenter />
+                                </CheckBox>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListBox.Resources>
+        </ListBox>
+        <Button x:Name="deleteTournamentButton" Content="Delete Tournament" HorizontalAlignment="Left" Margin="401,277,0,0" VerticalAlignment="Top" Width="120"/>
     </Grid>
 </Window>

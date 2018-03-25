@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdminController.cs" />
+    <Compile Include="CreateMatches.cs" />
+    <Compile Include="GetPlayers.cs" />
     <Compile Include="GetTournaments.cs" />
     <Compile Include="Login.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
