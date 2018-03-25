@@ -12,6 +12,7 @@ namespace Business
     public class Login
     {
         private UserDAO _userDAO;
+        public static User LoggedInUser;
 
         public Login()
         {
@@ -40,9 +41,11 @@ namespace Business
             }
             if (user.IsAdmin)
             {
+                LoggedInUser = user;
                 return UserLoginType.administrator;
             } else
             {
+                LoggedInUser = user;
                 return UserLoginType.player;
             }
         }

@@ -15,7 +15,7 @@ namespace Dao
 
         public User FindById(int id)
         {
-            string query = string.Format("select * from dbo.Player where id = @id");
+            string query = string.Format("select * from dbo.Users where id = @id");
             var sqlParameters = new SqlParameter[1];
             sqlParameters[0] = new SqlParameter("@id", SqlDbType.VarChar)
             {

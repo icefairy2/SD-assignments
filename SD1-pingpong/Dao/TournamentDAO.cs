@@ -34,7 +34,6 @@ namespace Dao
                         Name = reader["name"].ToString(),
                         Status = reader["status"].ToString()
                     };
-                    //tournament.Matches = _matchDAO.FindAllTournamentMatches(tournament);
                     tournamentList.Add(tournament);
                 }
                 DbConnection.ConnectionInstance.CloseConnection();

@@ -50,5 +50,12 @@ namespace Entity
         {
             IsAdmin = isAdmin;
         }
+
+        public override bool Equals(object obj)
+        {
+            var user = obj as User;
+            return user != null &&
+                   Id == user.Id;
+        }
     }
 }

@@ -9,48 +9,47 @@
     <Grid>
         <ListBox x:Name="tounamentList" HorizontalAlignment="Left" Height="261" Margin="46,70,0,0" VerticalAlignment="Top" Width="161" SelectionChanged="tounamentList_SelectionChanged"/>
         <Label Content="Tournaments" HorizontalAlignment="Left" Margin="84,26,0,0" VerticalAlignment="Top"/>
-        <Button Content="Select" HorizontalAlignment="Left" Margin="84,353,0,0" VerticalAlignment="Top" Width="75"/>
         <Grid HorizontalAlignment="Left" Height="54" Margin="248,34,0,0" VerticalAlignment="Top" Width="100">
-            <Label Content="Player1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="71" BorderBrush="Black" Background="#FFA8CDC6" BorderThickness="1"/>
-            <Label Content="Player2" HorizontalAlignment="Left" Margin="0,26,0,0" VerticalAlignment="Top" Width="71" BorderThickness="1" BorderBrush="Black" Background="#FF60B495"/>
-            <TextBox HorizontalAlignment="Left" Margin="71,0,0,0" VerticalAlignment="Top" Width="29" Background="#FFB9B9B9" Height="26" BorderBrush="Black"/>
-            <TextBox HorizontalAlignment="Left" Margin="71,26,0,0" VerticalAlignment="Top" Width="29" Background="#FFB9B9B9" BorderBrush="Black" BorderThickness="1" Height="28"/>
+            <Label x:Name="labelPlayer11" Content="Player1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="71" BorderBrush="Black" Background="#FFA8CDC6" BorderThickness="1"/>
+            <Label x:Name="labelPlayer12" Content="Player2" HorizontalAlignment="Left" Margin="0,26,0,0" VerticalAlignment="Top" Width="71" BorderThickness="1" BorderBrush="Black" Background="#FF60B495"/>
+            <TextBox IsReadOnly = "True" x:Name="match1P1" HorizontalAlignment="Left" Margin="71,0,0,0" VerticalAlignment="Top" Width="29" Background="#FFB9B9B9" Height="26" BorderBrush="Black"/>
+            <TextBox IsReadOnly = "True" x:Name="match1P2" HorizontalAlignment="Left" Margin="71,26,0,0" VerticalAlignment="Top" Width="29" Background="#FFB9B9B9" BorderBrush="Black" BorderThickness="1" Height="28"/>
         </Grid>
         <Grid HorizontalAlignment="Left" Height="54" Margin="248,109,0,0" VerticalAlignment="Top" Width="100">
-            <Label Content="Player1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="71" BorderBrush="Black" Background="#FFA8CDC6" BorderThickness="1"/>
-            <Label Content="Player2" HorizontalAlignment="Left" Margin="0,26,0,0" VerticalAlignment="Top" Width="71" BorderThickness="1" BorderBrush="Black" Background="#FF60B495"/>
-            <TextBox HorizontalAlignment="Left" Margin="71,0,0,0" VerticalAlignment="Top" Width="29" Background="#FFB9B9B9" Height="26" BorderBrush="Black"/>
-            <TextBox HorizontalAlignment="Left" Margin="71,26,0,0" VerticalAlignment="Top" Width="29" Background="#FFB9B9B9" BorderBrush="Black" BorderThickness="1" Height="28"/>
+            <Label x:Name="labelPlayer13" Content="Player1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="71" BorderBrush="Black" Background="#FFA8CDC6" BorderThickness="1"/>
+            <Label x:Name="labelPlayer14" Content="Player2" HorizontalAlignment="Left" Margin="0,26,0,0" VerticalAlignment="Top" Width="71" BorderThickness="1" BorderBrush="Black" Background="#FF60B495"/>
+            <TextBox IsReadOnly = "True" x:Name="match2P1" HorizontalAlignment="Left" Margin="71,0,0,0" VerticalAlignment="Top" Width="29" Background="#FFB9B9B9" Height="26" BorderBrush="Black"/>
+            <TextBox IsReadOnly = "True" x:Name="match2P2" HorizontalAlignment="Left" Margin="71,26,0,0" VerticalAlignment="Top" Width="29" Background="#FFB9B9B9" BorderBrush="Black" BorderThickness="1" Height="28"/>
         </Grid>
         <Grid HorizontalAlignment="Left" Height="54" Margin="248,183,0,0" VerticalAlignment="Top" Width="100">
-            <Label Content="Player1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="71" BorderBrush="Black" Background="#FFA8CDC6" BorderThickness="1"/>
-            <Label Content="Player2" HorizontalAlignment="Left" Margin="0,26,0,0" VerticalAlignment="Top" Width="71" BorderThickness="1" BorderBrush="Black" Background="#FF60B495"/>
-            <TextBox HorizontalAlignment="Left" Margin="71,0,0,0" VerticalAlignment="Top" Width="29" Background="#FFB9B9B9" Height="26" BorderBrush="Black"/>
-            <TextBox HorizontalAlignment="Left" Margin="71,26,0,0" VerticalAlignment="Top" Width="29" Background="#FFB9B9B9" BorderBrush="Black" BorderThickness="1" Height="28"/>
+            <Label x:Name="labelPlayer15" Content="Player1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="71" BorderBrush="Black" Background="#FFA8CDC6" BorderThickness="1"/>
+            <Label x:Name="labelPlayer16" Content="Player2" HorizontalAlignment="Left" Margin="0,26,0,0" VerticalAlignment="Top" Width="71" BorderThickness="1" BorderBrush="Black" Background="#FF60B495"/>
+            <TextBox IsReadOnly = "True" x:Name="match3P1" HorizontalAlignment="Left" Margin="71,0,0,0" VerticalAlignment="Top" Width="29" Background="#FFB9B9B9" Height="26" BorderBrush="Black"/>
+            <TextBox IsReadOnly = "True" x:Name="match3P2" HorizontalAlignment="Left" Margin="71,26,0,0" VerticalAlignment="Top" Width="29" Background="#FFB9B9B9" BorderBrush="Black" BorderThickness="1" Height="28"/>
         </Grid>
         <Grid HorizontalAlignment="Left" Height="54" Margin="248,263,0,0" VerticalAlignment="Top" Width="100">
-            <Label Content="Player1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="71" BorderBrush="Black" Background="#FFA8CDC6" BorderThickness="1"/>
-            <Label Content="Player2" HorizontalAlignment="Left" Margin="0,26,0,0" VerticalAlignment="Top" Width="71" BorderThickness="1" BorderBrush="Black" Background="#FF60B495"/>
-            <TextBox HorizontalAlignment="Left" Margin="71,0,0,0" VerticalAlignment="Top" Width="29" Background="#FFB9B9B9" Height="26" BorderBrush="Black"/>
-            <TextBox HorizontalAlignment="Left" Margin="71,26,0,0" VerticalAlignment="Top" Width="29" Background="#FFB9B9B9" BorderBrush="Black" BorderThickness="1" Height="28"/>
+            <Label x:Name="labelPlayer17" Content="Player1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="71" BorderBrush="Black" Background="#FFA8CDC6" BorderThickness="1"/>
+            <Label x:Name="labelPlayer18" Content="Player2" HorizontalAlignment="Left" Margin="0,26,0,0" VerticalAlignment="Top" Width="71" BorderThickness="1" BorderBrush="Black" Background="#FF60B495"/>
+            <TextBox IsReadOnly = "True" x:Name="match4P1" HorizontalAlignment="Left" Margin="71,0,0,0" VerticalAlignment="Top" Width="29" Background="#FFB9B9B9" Height="26" BorderBrush="Black"/>
+            <TextBox IsReadOnly = "True" x:Name="match4P2" HorizontalAlignment="Left" Margin="71,26,0,0" VerticalAlignment="Top" Width="29" Background="#FFB9B9B9" BorderBrush="Black" BorderThickness="1" Height="28"/>
         </Grid>
         <Grid HorizontalAlignment="Left" Height="54" Margin="411,82,0,0" VerticalAlignment="Top" Width="100">
-            <Label Content="Player1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="71" BorderBrush="Black" Background="#FFA8CDC6" BorderThickness="1"/>
+            <Label x:Name="labelPlayer21" Content="Player1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="71" BorderBrush="Black" Background="#FFA8CDC6" BorderThickness="1"/>
             <Label Content="Player2" HorizontalAlignment="Left" Margin="0,26,0,0" VerticalAlignment="Top" Width="71" BorderThickness="1" BorderBrush="Black" Background="#FF60B495"/>
-            <TextBox HorizontalAlignment="Left" Margin="71,0,0,0" VerticalAlignment="Top" Width="29" Background="#FFB9B9B9" Height="26" BorderBrush="Black"/>
-            <TextBox HorizontalAlignment="Left" Margin="71,26,0,0" VerticalAlignment="Top" Width="29" Background="#FFB9B9B9" BorderBrush="Black" BorderThickness="1" Height="28"/>
+            <TextBox IsReadOnly = "True" HorizontalAlignment="Left" Margin="71,0,0,0" VerticalAlignment="Top" Width="29" Background="#FFB9B9B9" Height="26" BorderBrush="Black"/>
+            <TextBox IsReadOnly = "True" HorizontalAlignment="Left" Margin="71,26,0,0" VerticalAlignment="Top" Width="29" Background="#FFB9B9B9" BorderBrush="Black" BorderThickness="1" Height="28"/>
         </Grid>
         <Grid HorizontalAlignment="Left" Height="54" Margin="411,219,0,0" VerticalAlignment="Top" Width="100">
             <Label Content="Player1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="71" BorderBrush="Black" Background="#FFA8CDC6" BorderThickness="1"/>
             <Label Content="Player2" HorizontalAlignment="Left" Margin="0,26,0,0" VerticalAlignment="Top" Width="71" BorderThickness="1" BorderBrush="Black" Background="#FF60B495"/>
-            <TextBox HorizontalAlignment="Left" Margin="71,0,0,0" VerticalAlignment="Top" Width="29" Background="#FFB9B9B9" Height="26" BorderBrush="Black"/>
-            <TextBox HorizontalAlignment="Left" Margin="71,26,0,0" VerticalAlignment="Top" Width="29" Background="#FFB9B9B9" BorderBrush="Black" BorderThickness="1" Height="28"/>
+            <TextBox IsReadOnly = "True" HorizontalAlignment="Left" Margin="71,0,0,0" VerticalAlignment="Top" Width="29" Background="#FFB9B9B9" Height="26" BorderBrush="Black"/>
+            <TextBox IsReadOnly = "True" HorizontalAlignment="Left" Margin="71,26,0,0" VerticalAlignment="Top" Width="29" Background="#FFB9B9B9" BorderBrush="Black" BorderThickness="1" Height="28"/>
         </Grid>
         <Grid HorizontalAlignment="Left" Height="54" Margin="571,151,0,0" VerticalAlignment="Top" Width="100">
             <Label Content="Player1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="71" BorderBrush="Black" Background="#FFA8CDC6" BorderThickness="1"/>
             <Label Content="Player2" HorizontalAlignment="Left" Margin="0,26,0,0" VerticalAlignment="Top" Width="71" BorderThickness="1" BorderBrush="Black" Background="#FF60B495"/>
-            <TextBox HorizontalAlignment="Left" Margin="71,0,0,0" VerticalAlignment="Top" Width="29" Background="#FFB9B9B9" Height="26" BorderBrush="Black"/>
-            <TextBox HorizontalAlignment="Left" Margin="71,26,0,0" VerticalAlignment="Top" Width="29" Background="#FFB9B9B9" BorderBrush="Black" BorderThickness="1" Height="28"/>
+            <TextBox IsReadOnly = "True" HorizontalAlignment="Left" Margin="71,0,0,0" VerticalAlignment="Top" Width="29" Background="#FFB9B9B9" Height="26" BorderBrush="Black"/>
+            <TextBox IsReadOnly = "True" HorizontalAlignment="Left" Margin="71,26,0,0" VerticalAlignment="Top" Width="29" Background="#FFB9B9B9" BorderBrush="Black" BorderThickness="1" Height="28"/>
         </Grid>
         <Canvas HorizontalAlignment="Left" Height="305" Margin="235,26,0,0" VerticalAlignment="Top" Width="458">
             <Line X1="0" Y1="0" X2="0" Y2="80" Stroke="Black" StrokeThickness="4" Canvas.Left="143" Canvas.Top="35" />
@@ -65,7 +64,7 @@
             <Line X1="0" Y1="0" X2="30" Y2="0" Stroke="Black" StrokeThickness="4" Canvas.Left="277" Canvas.Top="83" />
             <Line X1="0" Y1="0" X2="30" Y2="0" Stroke="Black" StrokeThickness="4" Canvas.Left="275" Canvas.Top="221" />
             <Line X1="0" Y1="0" X2="30" Y2="0" Stroke="Black" StrokeThickness="4" Canvas.Left="305" Canvas.Top="152" />
-            <Button Content="Play" Canvas.Left="115" Canvas.Top="10" Width="41"/>
+            <Button Content="Play" Canvas.Left="115" Canvas.Top="10" Width="41" Click="Button_Click"/>
             <Label Content="Winner:" Canvas.Left="145" Canvas.Top="327"/>
             <Label Content="player" Canvas.Left="196" Canvas.Top="327" BorderBrush="Black" BorderThickness="1" Width="83"/>
         </Canvas>

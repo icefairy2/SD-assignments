@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdminController.cs" />
+    <Compile Include="SaveScore.cs" />
     <Compile Include="CreateMatches.cs" />
     <Compile Include="GetPlayers.cs" />
     <Compile Include="GetTournaments.cs" />
