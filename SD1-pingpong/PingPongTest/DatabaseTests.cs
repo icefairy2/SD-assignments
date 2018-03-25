@@ -16,7 +16,7 @@ namespace PingPongTest
             var sqlConnection = DbConnection.ConnectionInstance.ActualConnection;
             DbConnection.ConnectionInstance.OpenConnection();
             Assert.AreEqual(sqlConnection.State, System.Data.ConnectionState.Open);
-            Assert.AreEqual(sqlConnection.ConnectionString, "Data Source=DESKTOP-R95RP8R;Initial Catalog=pingpong;Integrated Security=True");
+            Assert.AreEqual(sqlConnection.ConnectionString, "Data Source=DESKTOP-PU1RAF0;Initial Catalog=pingpong;Integrated Security=True");
             Assert.AreEqual(sqlConnection.Database, "pingpong");
         }
 
